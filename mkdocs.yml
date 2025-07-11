@@ -1,0 +1,53 @@
+# mkdocs.yml
+
+# --- Site Information ---
+site_name: "themahani Wiki"
+site_url: "https://themahani.github.io/wiki/"
+site_description: "A personal knowledge base for programming, tools, and tech."
+site_author: "Ali Mahani"
+
+# --- Theme Configuration (Material for MkDocs) ---
+theme:
+  name: material
+  logo: assets/logo.svg # Optional: create a logo in docs/assets/logo.svg
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    # Light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+# --- Extensions for Markdown ---
+# These add powerful features like call-out blocks and better code highlighting.
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+
+# --- Navigation Structure ---
+# This defines the order and hierarchy of your sidebar.
+nav:
+  - "Home": "index.md"
+  - "Command Line":
+      - "Git": "cli/git.md"
+      - "Docker": "cli/docker.md"
+  - "Python":
+      - "Virtual Environments": "python/venv.md"
+      - "Package Management": "python/packaging.md"

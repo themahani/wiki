@@ -33,6 +33,11 @@ theme:
 # --- Extensions for Markdown ---
 # These add powerful features like call-out blocks and better code highlighting.
 markdown_extensions:
+  - toc:
+      permalink: true
+      separator: "_"
+  - sane_lists
+  - smarty
   - admonition
   - pymdownx.details
   - pymdownx.superfences
@@ -44,10 +49,14 @@ markdown_extensions:
 # --- Navigation Structure ---
 # This defines the order and hierarchy of your sidebar.
 nav:
-  - "Home": "index.md"
-  - "Command Line":
-      - "Git": "cli/git.md"
-      - "Docker": "cli/docker.md"
-  - "Python":
-      - "Virtual Environments": "python/venv.md"
-      - "Package Management": "python/packaging.md"
+  - Home: "index.md"
+  - OS:
+      - Archlinux: "os/linux/arch.md"
+  - Version Control Systems:
+      - Git: "vcs/git.md"
+  - Containers:
+      - Docker: "containers/docker.md"
+  - Python:
+      - Virtual Environments: "python/venv.md"
+      - Anaconda and Variants: "python/conda.md"
+      - Package Management: "python/packaging.md"

@@ -3,21 +3,21 @@
 Welcome to package versioning hell :)
 
 Python provides an application known as `venv`, short for _virtual environment_. This
-application provide the crucial ability for the user to isolate their Python environment
-install thrid-party python packages locally. This is important since installing all of our packages
+application provides the crucial ability for the user to isolate their Python environment and
+install thrid-party packages. This is important since installing all of our packages
 on the python environment used by the operating system can be very dangerous.
 
 **Why?**:
 
 1. **Root Access**: Installing python packages in the root environment can lead to third-party packages
    gaining root access to your system which can lead to _arbitrary code execution_ on your system.
-2. **Clutter**: Working on multiple projects, each requiring a specific set of packages and lead to a large amount of clutter.
+2. **Clutter**: Working on multiple projects, each requiring a specific set of packages can lead to a large amount of clutter.
 3. **Version Conflict**: Some packages depend on specific versions of other packages. This can lead to package version conflicts
    very easily.
 
 ## Installation
 
-Your python executable should normally have `venv` preinstalled already.
+Your python executable should normally have `venv` preinstalled.
 You can check this by running
 
 ```bash
@@ -25,7 +25,7 @@ export PHYTON_EXE=$(command -v python || command -v python3)    # depending on y
 PYTHON_EXE -m venv -h
 ```
 
-The output should look like below:\
+The output should look like below:
 
 ```
 usage: venv [-h] [--system-site-packages] [--symlinks | --copies] [--clear] [--upgrade]
@@ -59,7 +59,7 @@ Once an environment has been created, you may wish to activate it, e.g. by sourc
 activate script in its bin directory.
 ```
 
-If for any reason you see an `ImportError`, then it means that executable of python doesn't have `venv` installed.\
+If for any reason you see an `ImportError`, then it means that python executable doesn't have `venv` installed.\
 So let's install it.
 
 ### Ubuntu
@@ -80,20 +80,22 @@ Using Pacman run:
 sudo pacman -Syy python-venv
 ```
 
-This command does the same for your Archlinux system.
+This command does the same for your Arch linux system.
 
 ## Basic Usage
 
 ### Creating a new virtual environment
 
 Let's create a new python environment and name it `test`.
-Note that I'm assuming the python3 executable name is `python`. In some OS's it can be `python3`.
+!!! note
+    I'm assuming the python3 executable name is `python`. 
+    In some OS's it can be `python3`.
 
 ```bash
 python -m venv test
 ```
 
-Note that this creates the new env in the current directory where the code is executed.
+This command creates the new env in the directory where the code is executed.
 Let's check it for our case:
 
 ```bash
@@ -117,3 +119,38 @@ ls -lh # List cwd in a list with human readable format
     ```bash
     python -m venv path/to/your/venv
     ```
+
+### Activating your environment
+
+The activation script is shell-dependent, while all of these scripts exist in the following 
+directory:
+```bash
+$VENV_DIR/bin/
+```
+where `VENV_DIR` is the path to your venv. If we list the directory, we'll see
+all the scripts for various shells.
+```bash
+ls -lh venv/bin/
+# example output:
+# total 68K
+# -rw-r--r-- 1 ali ali 8.9K Jul 29 10:40 Activate.ps1
+# -rw-r--r-- 1 ali ali 2.0K Jul 29 10:40 activate
+# -rw-r--r-- 1 ali ali  925 Jul 29 10:40 activate.csh
+# -rw-r--r-- 1 ali ali 2.2K Jul 29 10:40 activate.fish
+# -rwxr-xr-x 1 ali ali  246 Jul 29 12:50 pip
+# -rwxr-xr-x 1 ali ali  246 Jul 29 12:50 pip3
+# -rwxr-xr-x 1 ali ali  246 Jul 29 12:50 pip3.12
+# lrwxrwxrwx 1 ali ali    7 Jul 29 10:40 python -> python3
+# lrwxrwxrwx 1 ali ali   16 Jul 29 10:40 python3 -> /usr/bin/python3
+# lrwxrwxrwx 1 ali ali    7 Jul 29 10:40 python3.12 -> python3
+```
+For `bash` and `zsh`, we use the `venv/bin/activate` script.
+```bash
+source venv/bin/activate
+```
+Now if we check which python executable will run, we can check using
+```bash
+which python  # Or `which python3` depending on your OS
+# example output: /usr/home/user0/venv/bin/python
+```
+

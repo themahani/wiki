@@ -1,17 +1,9 @@
-# Welcome to MkDocs
+# Welcome to Ali's Wiki
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+This is were I plan to dump my knowledge and the things I learn.
+On tools I learn to interact with,
+ways to make my workspace efficient, or just any software/hardware guide I study.
 
-## Commands
+Feel free to contribute to it by adding issues/pull requests on [GitHub](https://github.com/themahani/wiki).
 
-- `mkdocs new [dir-name]` - Create a new project.
-- `mkdocs serve` - Start the live-reloading docs server.
-- `mkdocs build` - Build the documentation site.
-- `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+This project is provided under the GPL-3.0 license. For details please visit [the GitHub Repo](https://github.com/themahani/wiki/blob/main/LICENSE)

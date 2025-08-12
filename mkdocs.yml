@@ -57,6 +57,7 @@ nav:
   - Containers:
       - Docker: "containers/docker.md"
   - Python:
+      - Python Version Management: "python/pyenv.md"
       - Virtual Environments: "python/venv.md"
       - Anaconda and Variants: "python/conda.md"
       - Package Management: "python/packaging.md"

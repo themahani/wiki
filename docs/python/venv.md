@@ -114,7 +114,7 @@ ls -lh # List cwd in a list with human readable format
 ```
 
 !!! tip
-    You can make choose a custom path using the sample command below:
+    You can choose a custom path using the sample command below:
 
     ```bash
     python -m venv path/to/your/venv

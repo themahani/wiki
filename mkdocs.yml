@@ -2,7 +2,7 @@
 
 # --- Site Information ---
 site_name: "themahani Wiki"
-site_url: "https://themahani.github.io/wiki/"
+site_url: "https://wiki.alimahani.com/"
 site_description: "A personal knowledge base for programming, tools, and tech."
 site_author: "Ali Mahani"
 
@@ -52,12 +52,6 @@ nav:
   - Home: "index.md"
   - OS:
       - Archlinux: "os/linux/arch.md"
-  - Version Control Systems:
-      - Git: "vcs/git.md"
-  - Containers:
-      - Docker: "containers/docker.md"
   - Python:
       - Python Version Management: "python/pyenv.md"
       - Virtual Environments: "python/venv.md"
-      - Anaconda and Variants: "python/conda.md"
-      - Package Management: "python/packaging.md"

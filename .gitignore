@@ -208,3 +208,6 @@ __marimo__/
 
 # Directories to keep
 !.gitkeep
+
+# wrangler local state
+.wrangler/

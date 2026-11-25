@@ -9,7 +9,9 @@ site_author: "Ali Mahani"
 # --- Theme Configuration (Material for MkDocs) ---
 theme:
   name: material
-  logo: assets/logo.svg # Optional: create a logo in docs/assets/logo.svg
+  # The website's favicon. logo.svg is a white copy cropped to the glyph for the header.
+  logo: assets/logo.svg
+  favicon: assets/favicon.svg
   features:
     - navigation.tabs
     - navigation.sections

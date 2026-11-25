@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/wrangler@4/config-schema.json",
-  // A Worker with no script that serves the MkDocs build from site/.
+  // A Worker with no script that serves the Zensical build from site/.
   "name": "wiki",
   "compatibility_date": "2026-11-01",
   "assets": {

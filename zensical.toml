@@ -1,0 +1,60 @@
+# Zensical configuration. Zensical replaced MkDocs and Material for MkDocs.
+# Reference: https://zensical.org/docs/setup/basics/
+
+[project]
+site_name = "themahani Wiki"
+site_url = "https://wiki.alimahani.com/"
+site_description = "A personal knowledge base for programming, tools, and tech."
+site_author = "Ali Mahani"
+
+# The sidebar order and hierarchy. Every page listed here must exist, or the
+# strict build in CI fails.
+nav = [
+  { "Home" = "index.md" },
+  { "OS" = [
+    { "Archlinux" = "os/linux/arch.md" },
+  ] },
+  { "Python" = [
+    { "Python Version Management" = "python/pyenv.md" },
+    { "Virtual Environments" = "python/venv.md" },
+  ] },
+]
+
+[project.theme]
+# "classic" is the Material for MkDocs look. The default "modern" variant
+# restyles the site, and its light header would hide the white logo.
+variant = "classic"
+# The website's favicon. logo.svg is a white copy cropped to the glyph for the header.
+logo = "assets/logo.svg"
+favicon = "assets/favicon.svg"
+features = [
+  "navigation.tabs",
+  "navigation.sections",
+  "navigation.top",
+  "search.suggest",
+  "search.highlight",
+  "content.code.copy",
+  "content.code.annotate",
+]
+
+[[project.theme.palette]]
+scheme = "default"
+toggle.icon = "material/brightness-7"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+scheme = "slate"
+toggle.icon = "material/brightness-4"
+toggle.name = "Switch to light mode"
+
+[project.markdown_extensions]
+toc.permalink = true
+toc.separator = "_"
+sane_lists = {}
+smarty = {}
+admonition = {}
+pymdownx.details = {}
+pymdownx.superfences = {}
+pymdownx.highlight.anchor_linenums = true
+pymdownx.inlinehilite = {}
+pymdownx.snippets = {}

@@ -19,19 +19,19 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: 3.x
 
       - run: pip install -r requirements.txt
 
-      # Writes the site to site/, which wrangler.jsonc serves.
+      # Reads zensical.toml and writes the site to site/, which wrangler.jsonc serves.
       # --strict fails the build on warnings such as a nav entry with no page.
-      - run: mkdocs build --strict
+      - run: zensical build --strict --clean
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
 

@@ -1,3 +1,7 @@
+---
+description: An Arch Linux install guide, starting from the feature set I want on the machine.
+---
+
 # Arch Linux (btw)
 
 Arch linux is a distribution hailed for its minimalism (it's base bones) and

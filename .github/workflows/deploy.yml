@@ -21,15 +21,15 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v6
+      # Installs uv and caches its downloads between runs.
+      - uses: astral-sh/setup-uv@v10
         with:
-          python-version: 3.x
-
-      - run: pip install -r requirements.txt
+          enable-cache: true
 
       # Reads zensical.toml and writes the site to site/, which wrangler.jsonc serves.
-      # --strict fails the build on warnings such as a nav entry with no page.
-      - run: zensical build --strict --clean
+      # --locked installs the versions in uv.lock and fails if it is out of date with
+      # pyproject.toml. --strict fails the build on warnings such as a nav entry with no page.
+      - run: uv run --locked zensical build --strict --clean
 
       - uses: actions/setup-node@v7
         with:

@@ -5,11 +5,14 @@ Built with [Zensical](https://zensical.org) and styled to match [alimahani.com](
 
 ## Preview locally
 
+Install [uv](https://docs.astral.sh/uv/), then:
+
 ```bash
-pip install -r requirements.txt
-zensical serve                  # http://localhost:8000
-zensical build --strict --clean # the same build CI runs
+uv run zensical serve                  # http://localhost:8000
+uv run zensical build --strict --clean # the same build CI runs
 ```
+
+`uv run` installs the versions pinned in `uv.lock` into `.venv` on first use. To change a dependency, run `uv add <package>==<version>` and commit both `pyproject.toml` and `uv.lock`.
 
 Pushing to `main` builds the site and deploys it to Cloudflare with `wrangler deploy` (see `wrangler.jsonc`).
 

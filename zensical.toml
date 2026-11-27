@@ -1,18 +1,24 @@
 # Zensical configuration. Zensical replaced MkDocs and Material for MkDocs.
 # Reference: https://zensical.org/docs/setup/basics/
+#
+# The look matches alimahani.com. Colors, fonts and component styles live in
+# docs/stylesheets/extra.css; template overrides live in overrides/.
 
 [project]
-site_name = "themahani Wiki"
+site_name = "Ali Mahani Wiki"
 site_url = "https://wiki.alimahani.com/"
 site_description = "A personal knowledge base for programming, tools, and tech."
 site_author = "Ali Mahani"
+# Footer text. Zensical has no build-date variable in templates, so update the year by hand.
+copyright = "&copy; 2026 Ali Mahani"
+extra_css = ["stylesheets/extra.css"]
 
 # The sidebar order and hierarchy. Every page listed here must exist, or the
-# strict build in CI fails.
+# strict build in CI fails. The home page lists these pages too.
 nav = [
   { "Home" = "index.md" },
   { "OS" = [
-    { "Archlinux" = "os/linux/arch.md" },
+    { "Arch Linux" = "os/linux/arch.md" },
   ] },
   { "Python" = [
     { "Python Version Management" = "python/pyenv.md" },
@@ -21,40 +27,77 @@ nav = [
 ]
 
 [project.theme]
-# "classic" is the Material for MkDocs look. The default "modern" variant
-# restyles the site, and its light header would hide the white logo.
+# extra.css restyles the "classic" variant (the Material for MkDocs markup and CSS).
 variant = "classic"
-# The website's favicon. logo.svg is a white copy cropped to the glyph for the header.
+custom_dir = "overrides"
+# The custom header shows a text brand instead, and extra.css hides the logo in the
+# mobile drawer, so logo.svg is not shown anywhere. It is kept for a future header.
 logo = "assets/logo.svg"
 favicon = "assets/favicon.svg"
+# Fonts are loaded from Google Fonts in overrides/main.html.
+font = false
 features = [
-  "navigation.tabs",
   "navigation.sections",
   "navigation.top",
+  "navigation.footer",
+  "navigation.indexes",
   "search.suggest",
   "search.highlight",
   "content.code.copy",
   "content.code.annotate",
+  "toc.follow",
 ]
+icon.previous = "material/arrow-left"
+icon.next = "material/arrow-right"
+
+# Dark comes first, so it is the default, like alimahani.com.
+# Each toggle shows the theme it switches to.
+[[project.theme.palette]]
+scheme = "slate"
+primary = "custom"
+accent = "custom"
+toggle.icon = "material/weather-sunny"
+toggle.name = "Switch to light mode"
 
 [[project.theme.palette]]
 scheme = "default"
-toggle.icon = "material/brightness-7"
+primary = "custom"
+accent = "custom"
+toggle.icon = "material/weather-night"
 toggle.name = "Switch to dark mode"
 
-[[project.theme.palette]]
-scheme = "slate"
-toggle.icon = "material/brightness-4"
-toggle.name = "Switch to light mode"
+[project.extra]
+# Hides "Made with Zensical" in the footer.
+generator = false
+# Header and footer links to the main site.
+homepage_name = "alimahani.com"
+homepage_url = "https://alimahani.com"
+
+# Text links in the footer, rendered by overrides/partials/social.html.
+[[project.extra.social]]
+name = "email"
+link = "mailto:ali.a.mahani@zoho.com"
+
+[[project.extra.social]]
+name = "github"
+link = "https://github.com/themahani"
+
+[[project.extra.social]]
+name = "linkedin"
+link = "https://www.linkedin.com/in/ali-a-mahani"
 
 [project.markdown_extensions]
-toc.permalink = true
+toc.permalink = "#"
 toc.separator = "_"
 sane_lists = {}
 smarty = {}
 admonition = {}
+attr_list = {}
+md_in_html = {}
+tables = {}
 pymdownx.details = {}
 pymdownx.superfences = {}
 pymdownx.highlight.anchor_linenums = true
 pymdownx.inlinehilite = {}
 pymdownx.snippets = {}
+pymdownx.tasklist.custom_checkbox = true

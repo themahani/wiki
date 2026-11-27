@@ -1,0 +1,41 @@
+{#-
+  Landing page in the style of the alimahani.com home page: a short intro,
+  then every page in `nav`, grouped by section like the site's "Writing" list.
+  Use it with `template: home.html` in a page's front matter.
+-#}
+{% extends "main.html" %}
+
+{% macro entries(items) %}
+  {% for item in items %}
+    {% if item.children %}
+      {{ entries(item.children) }}
+    {% elif item.url %}
+      <li>
+        <a href="{{ item.url | url }}">
+          <span class="am-entry__text">
+            <span class="am-entry__title">{{ item.title }}</span>
+            {% if item.meta and item.meta.description %}
+              <span class="am-entry__desc">{{ item.meta.description }}</span>
+            {% endif %}
+          </span>
+        </a>
+      </li>
+    {% endif %}
+  {% endfor %}
+{% endmacro %}
+
+{% block content %}
+  <div class="am-home md-typeset">
+    {{ page.content }}
+    {% for item in nav.items %}
+      {% if item.children %}
+        <section class="am-section">
+          <h2 class="am-section__title" id="{{ item.title | lower | replace(' ', '-') }}">{{ item.title }}</h2>
+          <ul class="am-entries">
+            {{ entries(item.children) }}
+          </ul>
+        </section>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,3 +1,7 @@
+---
+description: Keep each project's packages apart from the system Python with venv.
+---
+
 # Virtual Environments
 
 Welcome to package versioning hell :)

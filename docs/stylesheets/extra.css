@@ -1,0 +1,952 @@
+/*
+ * Restyles Material for MkDocs to match alimahani.com (website/src/styles/global.css).
+ *
+ * The --am-* tokens hold the site's colors. Material's own --md-* variables are mapped
+ * onto them per scheme: "slate" is dark (the default) and "default" is light.
+ * Material's root font size is 20px, so 1rem here is 20px, not the site's 16px.
+ */
+
+/* ---------- Tokens ---------- */
+
+:root {
+  --md-text-font: "Inter";
+  --md-code-font: "JetBrains Mono";
+  --am-serif: "Newsreader", Georgia, serif;
+  --am-sans: "Inter", system-ui, sans-serif;
+  --am-mono: "JetBrains Mono", ui-monospace, monospace;
+  --am-radius: 10px;
+}
+
+[data-md-color-scheme="slate"] {
+  --am-bg: #0e0f11;
+  --am-surface: #15171a;
+  --am-fg: #e4e6ea;
+  --am-muted: #9a9fa8;
+  --am-rule: rgba(255, 255, 255, 0.1);
+  --am-rule-strong: rgba(255, 255, 255, 0.22);
+  --am-accent: #5fd4a8;
+  --am-accent-fg: #0e0f11;
+
+  --am-note: #6ea8fe;
+  --am-tip: #5fd38d;
+  --am-important: #b794f6;
+  --am-warning: #f0b429;
+  --am-caution: #ff6b6b;
+
+  /* Pygments colors from the github-dark Shiki theme the site uses. */
+  --md-code-hl-keyword-color: #ff7b72;
+  --md-code-hl-operator-color: #ff7b72;
+  --md-code-hl-string-color: #a5d6ff;
+  --md-code-hl-number-color: #79c0ff;
+  --md-code-hl-constant-color: #79c0ff;
+  --md-code-hl-special-color: #79c0ff;
+  --md-code-hl-function-color: #d2a8ff;
+  --md-code-hl-name-color: #e6edf3;
+  --md-code-hl-variable-color: #ffa657;
+  --md-code-hl-generic-color: #8b949e;
+  --md-code-hl-comment-color: #8b949e;
+  --md-code-hl-punctuation-color: #e6edf3;
+}
+
+[data-md-color-scheme="default"] {
+  --am-bg: #fbfbfa;
+  --am-surface: #ffffff;
+  --am-code-bg: #f2f3f4;
+  --am-fg: #17181a;
+  --am-muted: #5d6168;
+  --am-rule: rgba(0, 0, 0, 0.1);
+  --am-rule-strong: rgba(0, 0, 0, 0.22);
+  --am-accent: #0f7b5c;
+  --am-accent-fg: #ffffff;
+
+  --am-note: #1d5fd6;
+  --am-tip: #18794e;
+  --am-important: #6d3fc0;
+  --am-warning: #9a5b00;
+  --am-caution: #c42b2b;
+
+  /* Pygments colors from the github-light Shiki theme the site uses. */
+  --md-code-hl-keyword-color: #cf222e;
+  --md-code-hl-operator-color: #cf222e;
+  --md-code-hl-string-color: #0a3069;
+  --md-code-hl-number-color: #0550ae;
+  --md-code-hl-constant-color: #0550ae;
+  --md-code-hl-special-color: #0550ae;
+  --md-code-hl-function-color: #8250df;
+  --md-code-hl-name-color: #1f2328;
+  --md-code-hl-variable-color: #953800;
+  --md-code-hl-generic-color: #6e7781;
+  --md-code-hl-comment-color: #6e7781;
+  --md-code-hl-punctuation-color: #1f2328;
+}
+
+[data-md-color-scheme="slate"],
+[data-md-color-scheme="default"] {
+  --md-default-bg-color: var(--am-bg);
+  --md-default-bg-color--light: var(--am-bg);
+  --md-default-bg-color--lighter: var(--am-surface);
+  --md-default-bg-color--lightest: var(--am-surface);
+  --md-default-fg-color: var(--am-fg);
+  --md-default-fg-color--light: var(--am-muted);
+  --md-default-fg-color--lighter: var(--am-rule-strong);
+  --md-default-fg-color--lightest: var(--am-rule);
+
+  --md-primary-fg-color: var(--am-accent);
+  --md-primary-fg-color--light: var(--am-accent);
+  --md-primary-fg-color--dark: var(--am-accent);
+  --md-primary-bg-color: var(--am-accent-fg);
+  --md-primary-bg-color--light: var(--am-accent-fg);
+  --md-accent-fg-color: var(--am-accent);
+  --md-accent-fg-color--transparent: color-mix(
+    in srgb,
+    var(--am-accent) 12%,
+    transparent
+  );
+  --md-accent-bg-color: var(--am-accent-fg);
+
+  --md-typeset-color: var(--am-fg);
+  --md-typeset-a-color: var(--am-accent);
+  --md-typeset-mark-color: color-mix(
+    in srgb,
+    var(--am-warning) 30%,
+    transparent
+  );
+  --md-typeset-table-color: var(--am-rule);
+  --md-typeset-table-color--light: var(--am-surface);
+
+  --md-code-fg-color: var(--am-fg);
+  --md-code-bg-color: var(--am-code-bg, var(--am-surface));
+  --md-code-bg-color--light: var(--am-code-bg, var(--am-surface));
+  --md-code-bg-color--lighter: var(--am-code-bg, var(--am-surface));
+  --md-code-hl-color: var(--am-accent);
+  --md-code-hl-color--light: color-mix(
+    in srgb,
+    var(--am-accent) 12%,
+    transparent
+  );
+
+  --md-admonition-fg-color: var(--am-fg);
+  --md-admonition-bg-color: transparent;
+
+  --md-footer-fg-color: var(--am-fg);
+  --md-footer-fg-color--light: var(--am-muted);
+  --md-footer-fg-color--lighter: var(--am-muted);
+  --md-footer-bg-color: var(--am-bg);
+  --md-footer-bg-color--dark: var(--am-bg);
+
+  --md-shadow-z1: none;
+  --md-shadow-z2: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.18);
+  --md-shadow-z3: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.25);
+}
+
+/* Material scales the root font up on wide screens. Keep one size, like the site. */
+html {
+  font-size: 125%;
+}
+
+body {
+  background: var(--am-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--am-accent) 30%, transparent);
+}
+
+/* ---------- Header ---------- */
+
+.md-header,
+.md-header--shadow {
+  background: color-mix(in srgb, var(--am-bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  color: var(--am-fg);
+  border-bottom: 1px solid var(--am-rule);
+  box-shadow: none;
+}
+
+.md-header__inner {
+  gap: 0.2rem;
+}
+
+.am-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0.4rem;
+  font-family: var(--am-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--am-fg);
+}
+
+.am-brand:hover {
+  color: var(--am-accent);
+}
+
+.am-brand__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--am-accent);
+}
+
+.am-brand__sub {
+  font-weight: 400;
+  color: var(--am-muted);
+}
+
+.md-header__title {
+  margin-left: 0.6rem;
+  font-family: var(--am-sans);
+  font-size: 0.7rem;
+  color: var(--am-muted);
+}
+
+.am-links {
+  display: none;
+  font-family: var(--am-sans);
+  font-size: 0.7rem;
+}
+
+.am-links a {
+  padding: 0.6rem;
+  color: var(--am-muted);
+}
+
+.am-links a:hover,
+.am-links a[aria-current="page"] {
+  color: var(--am-fg);
+}
+
+@media screen and (min-width: 60em) {
+  .am-links {
+    display: flex;
+  }
+}
+
+/* Icon buttons (menu, search, theme) get the site's bordered square. */
+/* Only box and padding change here; Material's own rules decide which buttons show. */
+.md-header__button.md-icon {
+  width: 2.2rem;
+  height: 2.2rem;
+  margin: 0.1rem;
+  padding: calc((2.2rem - 2px - 0.9rem) / 2);
+  border: 1px solid var(--am-rule);
+  border-radius: 8px;
+}
+
+.md-header__button.md-icon:hover {
+  border-color: var(--am-rule-strong);
+  opacity: 1;
+}
+
+.md-header__button.md-icon svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.md-header__option {
+  margin-left: 0.2rem;
+}
+
+/* ---------- Search ---------- */
+
+/* Zensical's search is a button that opens a dialog. The button uses the primary
+   colors, which are the accent here, so give it the site's bordered style. */
+.md-search__button,
+.md-search__button:is(:hover, :focus) {
+  color: var(--am-muted);
+  background-color: var(--am-surface);
+  font-family: var(--am-sans);
+}
+
+.md-search__button::before {
+  background-color: var(--am-muted);
+}
+
+.md-search__button::after {
+  border: 1px solid var(--am-rule);
+  background: var(--am-bg);
+  color: var(--am-muted);
+  font-family: var(--am-mono);
+  font-size: 0.55rem;
+}
+
+@media screen and (min-width: 45em) {
+  .md-search__button {
+    width: 10rem;
+    height: 2.2rem;
+    border: 1px solid var(--am-rule);
+    border-radius: 8px;
+  }
+
+  .md-search__button:is(:hover, :focus) {
+    border-color: var(--am-rule-strong);
+    color: var(--am-fg);
+  }
+
+  .md-search__button::before {
+    top: 0.58rem;
+  }
+
+  .md-search__button::after {
+    top: 0.5rem;
+  }
+}
+
+/* ---------- Sidebars ---------- */
+
+.md-main__inner {
+  margin-top: 2.4rem;
+}
+
+.md-nav {
+  font-family: var(--am-sans);
+  font-size: 0.7rem;
+}
+
+.md-nav--primary .md-nav__item,
+.md-nav--primary .md-nav__title {
+  font-size: 0.7rem;
+}
+
+/* Section labels look like the site's "On this page" label. */
+.md-nav__title,
+.md-nav__item--section > .md-nav__link {
+  font-size: 0.55rem !important;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--am-muted);
+}
+
+.md-nav__item--section {
+  margin: 1.6em 0;
+}
+
+.md-nav__link {
+  margin-top: 0.1rem;
+}
+
+.md-sidebar--primary .md-nav__item:not(.md-nav__item--section) > .md-nav__link,
+.md-sidebar--secondary .md-nav__link {
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+  color: var(--am-muted);
+}
+
+.md-sidebar .md-nav__item:not(.md-nav__item--section) > .md-nav__link:hover,
+.md-sidebar .md-nav__link:is(:hover, :focus) {
+  color: var(--am-fg);
+  background: var(--am-surface);
+}
+
+.md-nav__item .md-nav__link--active,
+.md-nav__item .md-nav__link--active code {
+  color: var(--am-fg);
+}
+
+.md-sidebar--primary .md-nav__link--active {
+  background: var(--am-surface);
+  box-shadow: inset 2px 0 0 var(--am-accent);
+}
+
+.md-sidebar--secondary .md-nav__link--passed {
+  color: var(--am-muted);
+}
+
+.md-sidebar--secondary .md-nav__link--active {
+  color: var(--am-accent);
+}
+
+/* The site name above the primary nav is redundant next to the header brand. */
+@media screen and (min-width: 76.25em) {
+  .md-nav--primary > .md-nav__title {
+    display: none;
+  }
+}
+
+/* The mobile drawer. */
+.md-nav--primary .md-nav__title[for="__drawer"] {
+  background: var(--am-surface);
+  color: var(--am-fg);
+  font-family: var(--am-mono);
+  font-size: 0.7rem !important;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+@media screen and (max-width: 76.234375em) {
+  .md-nav--primary .md-nav__title[for="__drawer"] .md-logo {
+    display: none;
+  }
+
+  .md-nav--primary .md-nav__link {
+    padding: 0.6rem 0.8rem;
+  }
+}
+
+.md-sidebar__scrollwrap {
+  scrollbar-color: var(--am-rule-strong) transparent;
+}
+
+/* ---------- Article ---------- */
+
+/* Zensical wraps TOC entries in .md-typeset. Keep the sidebar font there. */
+.md-nav .md-typeset {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+.md-typeset {
+  font-family: var(--am-serif);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--am-fg);
+}
+
+.md-content__inner {
+  padding-top: 0;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+  font-family: var(--am-sans);
+  color: var(--am-fg);
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.md-typeset h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.md-typeset h1 strong {
+  font-weight: inherit;
+}
+
+/* The title's permalink is never useful, and on phones it wraps to a second line. */
+.md-typeset h1 .headerlink {
+  display: none;
+}
+
+.md-typeset h2 {
+  margin: 2.6em 0 0.8em;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.md-typeset h3 {
+  margin: 2em 0 0.8em;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.md-typeset h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* The line after the title: description, section and reading time. */
+.md-typeset .am-description {
+  margin: 0.8rem 0 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--am-muted);
+}
+
+.md-typeset .am-meta {
+  margin: 1.2rem 0 2rem;
+  padding: 0.6rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  border-top: 1px solid var(--am-rule);
+  border-bottom: 1px solid var(--am-rule);
+  font-family: var(--am-mono);
+  font-size: 0.65rem;
+  color: var(--am-muted);
+}
+
+.md-typeset .am-meta span:first-child:not(:last-child) {
+  color: var(--am-accent);
+}
+
+.md-typeset a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--am-rule-strong);
+  text-underline-offset: 0.2em;
+}
+
+.md-typeset a:is(:hover, :focus) {
+  color: var(--am-accent);
+}
+
+.md-typeset .headerlink {
+  text-decoration: none;
+  color: var(--am-rule-strong);
+}
+
+.md-typeset li {
+  margin-bottom: 0.3em;
+}
+
+.md-typeset strong {
+  font-weight: 600;
+}
+
+.md-typeset blockquote {
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--am-rule-strong);
+  color: var(--am-muted);
+  font-style: italic;
+}
+
+.md-typeset hr {
+  margin: 3em 0;
+  border-bottom: 1px solid var(--am-rule);
+}
+
+/* Tables follow the site: no box, uppercase headers, rules between rows. */
+.md-typeset table:not([class]) {
+  border: 0;
+  border-radius: 0;
+  font-size: 0.8rem;
+  box-shadow: none;
+}
+
+.md-typeset table:not([class]) th {
+  padding: 0.6rem 1.25rem 0.6rem 0;
+  background: transparent;
+  border-bottom: 1px solid var(--am-rule-strong);
+  color: var(--am-muted);
+  font-family: var(--am-sans);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.md-typeset table:not([class]) td {
+  padding: 0.6rem 1.25rem 0.6rem 0;
+  border-top: 0;
+  border-bottom: 1px solid var(--am-rule);
+}
+
+.md-typeset table:not([class]) tbody tr:hover {
+  background: transparent;
+  box-shadow: none;
+}
+
+.md-typeset img,
+.md-typeset video {
+  border-radius: var(--am-radius);
+}
+
+/* ---------- Code ---------- */
+
+.md-typeset code,
+.md-typeset kbd,
+.md-typeset pre {
+  font-family: var(--am-mono);
+}
+
+.md-typeset :not(pre) > code {
+  padding: 0.1em 0.35em;
+  border: 1px solid var(--am-rule);
+  border-radius: 4px;
+  font-size: 0.82em;
+  word-break: normal;
+}
+
+.md-typeset h1 code,
+.md-typeset h2 code,
+.md-typeset h3 code {
+  font-size: 0.85em;
+}
+
+.md-typeset .highlight {
+  margin: 1.1em 0;
+  border: 1px solid var(--am-rule);
+  border-radius: var(--am-radius);
+  background: var(--md-code-bg-color);
+  overflow: hidden;
+}
+
+.md-typeset pre {
+  margin: 0;
+  font-size: 0.7rem;
+  line-height: 1.65;
+}
+
+.md-typeset pre > code {
+  padding: 0.9rem 1rem 1rem;
+  border-radius: 0;
+  scrollbar-color: var(--am-rule-strong) transparent;
+}
+
+
+/* Material pulls code blocks to the screen edge on phones. Keep them in the gutter. */
+@media screen and (max-width: 44.984375em) {
+  .md-content__inner > pre,
+  .md-content__inner > .highlight {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .md-content__inner > .highlight > pre > code {
+    border-radius: 0;
+  }
+}
+
+/* A file name from ```bash title="..."``` renders as the site's code header. */
+.md-typeset .highlight span.filename {
+  margin: 0;
+  padding: 0.45rem 1rem;
+  border-bottom: 1px solid var(--am-rule);
+  border-radius: 0;
+  background: transparent;
+  color: var(--am-muted);
+  font-family: var(--am-mono);
+  font-size: 0.6rem;
+  font-weight: 400;
+}
+
+.md-typeset .highlight span.filename + pre > code {
+  border-radius: 0;
+}
+
+/* Zensical puts the copy button in .md-code__nav at the block's top right.
+   Shape it like the site's bordered "Copy" button. */
+.md-code__nav,
+:hover > .md-code__nav {
+  top: 0.4rem;
+  right: 0.4rem;
+  padding: 0;
+  background: transparent;
+}
+
+.md-code__button {
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid var(--am-rule);
+  border-radius: 6px;
+  background: var(--md-code-bg-color);
+  color: var(--am-muted);
+}
+
+:hover > * > .md-code__button {
+  color: var(--am-muted);
+}
+
+.md-code__button::after {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.md-code__button:is(:hover, :focus, .focus-visible) {
+  border-color: var(--am-rule-strong);
+  color: var(--am-fg);
+}
+
+.md-typeset .highlighttable {
+  margin: 0;
+}
+
+.md-typeset .highlighttable .linenos {
+  background: transparent;
+  color: var(--am-muted);
+  opacity: 0.6;
+}
+
+/* ---------- Admonitions, styled like the site's callouts ---------- */
+
+.md-typeset .admonition,
+.md-typeset details {
+  --c: var(--am-note);
+  margin: 1.5em 0;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--c) 35%, transparent);
+  border-radius: var(--am-radius);
+  background: color-mix(in srgb, var(--c) 8%, transparent);
+  box-shadow: none;
+  font-size: 0.85rem;
+}
+
+.md-typeset .admonition > :last-child,
+.md-typeset details > :last-child {
+  margin-bottom: 0;
+}
+
+.md-typeset .admonition-title,
+.md-typeset summary {
+  margin: 0 0 0.6em;
+  padding: 0 0 0 1.25rem;
+  border: 0;
+  background: transparent;
+  color: var(--c);
+  font-family: var(--am-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.md-typeset .admonition > .admonition-title,
+.md-typeset details > summary {
+  background-color: transparent;
+}
+
+.md-typeset .admonition-title::before,
+.md-typeset summary::before {
+  top: 0.1em;
+  left: 0;
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: var(--c);
+}
+
+.md-typeset details:not([open]) > summary {
+  margin-bottom: 0;
+}
+
+.md-typeset summary::after {
+  top: 0.05em;
+  right: 0;
+  color: var(--c);
+}
+
+.md-typeset
+  :is(.admonition, details):is(
+    .tip,
+    .hint,
+    .success,
+    .check,
+    .done,
+    .question,
+    .help,
+    .faq
+  ) {
+  --c: var(--am-tip);
+}
+
+.md-typeset :is(.admonition, details):is(.example, .quote, .cite, .important) {
+  --c: var(--am-important);
+}
+
+.md-typeset :is(.admonition, details):is(.warning, .caution, .attention) {
+  --c: var(--am-warning);
+}
+
+.md-typeset
+  :is(.admonition, details):is(
+    .danger,
+    .error,
+    .failure,
+    .fail,
+    .missing,
+    .bug
+  ) {
+  --c: var(--am-caution);
+}
+
+.md-typeset
+  :is(.admonition, details)
+  > :is(.admonition-title, summary)::before {
+  background-color: var(--c);
+}
+
+/* ---------- Footer ---------- */
+
+.md-footer {
+  border-top: 1px solid var(--am-rule);
+}
+
+.md-footer__inner {
+  padding: 0.6rem 0;
+}
+
+.md-footer__link {
+  font-family: var(--am-sans);
+}
+
+.md-footer__link:is(:hover, :focus) {
+  color: var(--am-accent);
+  opacity: 1;
+}
+
+.md-footer__direction {
+  font-family: var(--am-mono);
+  font-size: 0.6rem;
+  color: var(--am-muted);
+  opacity: 1;
+}
+
+.md-footer__title {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.md-footer-meta {
+  border-top: 1px solid var(--am-rule);
+}
+
+.md-footer-meta.md-typeset {
+  font-family: var(--am-mono);
+}
+
+.md-footer-meta__inner {
+  padding: 1.2rem 0.8rem 2.4rem;
+  justify-content: space-between;
+}
+
+.md-copyright,
+.md-social {
+  margin: 0;
+  padding: 0.4rem 0;
+  width: auto;
+  font-size: 0.65rem;
+  color: var(--am-muted);
+}
+
+.md-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.md-social__link {
+  width: auto;
+  height: auto;
+}
+
+.md-typeset .md-social__link {
+  color: var(--am-muted);
+  text-decoration: none;
+}
+
+.md-typeset .md-social__link:hover {
+  color: var(--am-accent);
+}
+
+/* ---------- Back-to-top button ---------- */
+
+.md-top {
+  border: 1px solid var(--am-rule);
+  background: var(--am-surface);
+  color: var(--am-muted);
+  box-shadow: none;
+  font-family: var(--am-sans);
+}
+
+.md-top:is(:hover, :focus) {
+  border-color: var(--am-rule-strong);
+  background: var(--am-surface);
+  color: var(--am-fg);
+}
+
+/* ---------- Home page (overrides/home.html) ---------- */
+
+.am-home {
+  max-width: 45rem;
+  margin: 0 auto;
+  padding: 1.6rem 0.8rem 0;
+}
+
+@media screen and (min-width: 45em) {
+  .am-home {
+    padding-top: 3.2rem;
+  }
+}
+
+.md-typeset .am-kicker {
+  margin: 0 0 1rem;
+  color: var(--am-accent);
+  font-family: var(--am-mono);
+  font-size: 0.65rem;
+}
+
+.am-home h1 {
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+
+.md-typeset .am-lead {
+  margin: 1.2rem 0 0;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.md-typeset .am-muted {
+  margin: 1rem 0 0;
+  color: var(--am-muted);
+}
+
+.am-section {
+  padding-top: 3.2rem;
+}
+
+.md-typeset .am-section__title {
+  margin: 0;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--am-rule);
+  font-size: 1.2rem;
+}
+
+.am-home.md-typeset ul.am-entries {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.am-home.md-typeset ul.am-entries > li {
+  margin: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--am-rule);
+}
+
+.md-typeset .am-entries a {
+  display: block;
+  padding: 0.9rem 0;
+  text-decoration: none;
+}
+
+.am-entry__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.am-entry__title {
+  font-family: var(--am-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.md-typeset .am-entries a:is(:hover, :focus) .am-entry__title {
+  color: var(--am-accent);
+}
+
+.md-typeset .am-entries a:is(:hover, :focus) {
+  color: inherit;
+}
+
+.am-entry__desc {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--am-muted);
+}

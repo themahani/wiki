@@ -1,9 +1,23 @@
-# Welcome to Ali's Wiki
+---
+template: home.html
+description: Notes on the tools I use, how I set up my machines, and the software and hardware guides I work through.
+hide:
+  - navigation
+  - toc
+  - footer
+---
 
-This is were I plan to dump my knowledge and the things I learn.
-On tools I learn to interact with,
-ways to make my workspace efficient, or just any software/hardware guide I study.
+<p class="am-kicker">Wiki · notes on tools and setups</p>
 
-Feel free to contribute to it by adding issues/pull requests on [GitHub](https://github.com/themahani/wiki).
+# Ali's wiki
 
-This project is provided under the GPL-3.0 license. For details please visit [the GitHub Repo](https://github.com/themahani/wiki/blob/main/LICENSE)
+<p class="am-lead">
+This is where I keep what I learn about the tools I use, ways to make my workspace efficient,
+and any software or hardware guide I work through.
+</p>
+
+<p class="am-muted">
+Found a mistake or want to add something? Open an issue or a pull request on
+<a href="https://github.com/themahani/wiki">GitHub</a>. The wiki is licensed under
+<a href="https://github.com/themahani/wiki/blob/main/LICENSE">GPL-3.0</a>.
+</p>

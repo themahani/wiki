@@ -1,0 +1,32 @@
+{#-
+  Page header in the style of alimahani.com posts. Under the title go
+  the page's `description` (from its front matter), its section and a reading time.
+  Based on zensical-ui 0.0.43 partials/content.html. Zensical renders templates
+  with minijinja, so this uses filters (split, striptags) rather than string methods.
+-#}
+{% include "partials/actions.html" %}
+{% set words = page.content | striptags | split | list | length %}
+{% set minutes = [(words + 219) // 220, 1] | max %}
+{% set header %}
+  {% if page.meta and page.meta.description %}
+    <p class="am-description">{{ page.meta.description }}</p>
+  {% endif %}
+  <p class="am-meta">
+    {% for section in page.ancestors | reverse %}
+      <span>{{ section.title }}</span>
+    {% endfor %}
+    <span>{{ minutes }} min read</span>
+  </p>
+{% endset %}
+{% if "</h1>" in page.content %}
+  {% set parts = page.content | split("</h1>", 1) | list %}
+  {{ parts[0] }}</h1>{{ header }}{{ parts[1] }}
+{% else %}
+  <h1>{{ page.title | d(config.site_name, true) }}</h1>
+  {{ header }}
+  {{ page.content }}
+{% endif %}
+{% include "partials/tags.html" %}
+{% include "partials/source-file.html" %}
+{% include "partials/feedback.html" %}
+{% include "partials/comments.html" %}

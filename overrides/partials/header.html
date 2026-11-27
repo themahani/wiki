@@ -1,0 +1,58 @@
+{#-
+  Header in the style of alimahani.com: a "ali mahani / wiki" brand on the left,
+  then links to the main site, search and the theme toggle.
+  Based on zensical-ui 0.0.43 partials/header.html (classic variant).
+-#}
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="{{ lang.t('header') }}">
+    <label class="md-header__button md-icon" for="__drawer">
+      <span class="md-visually-hidden">{{ lang.t('nav') }}</span>
+      {% set icon = config.theme.icon.menu or "material/menu" %}
+      {% include ".icons/" ~ icon ~ ".svg" %}
+    </label>
+    <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" class="am-brand" aria-label="{{ config.site_name | e }}" data-md-component="logo">
+      <span class="am-brand__dot" aria-hidden="true"></span>
+      <span>ali mahani</span>
+      <span class="am-brand__sub">/ wiki</span>
+    </a>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic"></div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            {% if page.meta and page.meta.title %}
+              {{ page.meta.title }}
+            {% else %}
+              {{ page.title }}
+            {% endif %}
+          </span>
+        </div>
+      </div>
+    </div>
+    {% if config.extra.homepage_url %}
+      <div class="am-links">
+        <a href="{{ config.extra.homepage_url }}/posts/">Writing</a>
+        <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" aria-current="page">Wiki</a>
+      </div>
+    {% endif %}
+    {% if "search" in config.plugins %}
+      {% set search = config.plugins["search"] | attr("config") %}
+      {% if search.enabled %}
+        <label class="md-header__button md-icon" for="__search">
+          <span class="md-visually-hidden">{{ lang.t('search') }}</span>
+          {% set icon = config.theme.icon.search or "material/magnify" %}
+          {% include ".icons/" ~ icon ~ ".svg" %}
+        </label>
+        {% include "partials/search.html" %}
+      {% endif %}
+    {% endif %}
+    {% if config.theme.palette %}
+      {% if not config.theme.palette is mapping %}
+        {% include "partials/palette.html" %}
+      {% endif %}
+    {% endif %}
+    {% if not config.theme.palette is mapping %}
+      {% include "partials/javascripts/palette.html" %}
+    {% endif %}
+  </nav>
+</header>

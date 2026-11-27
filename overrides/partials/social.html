@@ -1,0 +1,9 @@
+{#- Plain text links, like the footer on alimahani.com. Set them in extra.social. -#}
+<div class="md-social">
+  {% if config.extra.homepage_url %}
+    <a href="{{ config.extra.homepage_url }}" class="md-social__link">{{ config.extra.homepage_name }}</a>
+  {% endif %}
+  {% for social in config.extra.social %}
+    <a href="{{ social.link }}" class="md-social__link" rel="noopener">{{ social.name }}</a>
+  {% endfor %}
+</div>
